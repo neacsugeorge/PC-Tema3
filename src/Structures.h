@@ -64,7 +64,7 @@ typedef struct {
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 */
 typedef struct {
-    //qname variabil
+    char * qname;
     unsigned short qtype;
     unsigned short qclass;
 } dns_question_t;
@@ -100,5 +100,8 @@ typedef struct {
     //rdata variabil;
 } dns_rr_t;
 
+
+dns_question_t * createQuestion(char * name, char * type);
+unsigned short getType(char * type);
 
 #endif
