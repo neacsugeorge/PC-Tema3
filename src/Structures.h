@@ -100,8 +100,9 @@ typedef struct {
     //rdata variabil;
 } dns_rr_t;
 
-
+dns_header_t * createHeader();
 dns_question_t * createQuestion(char * name, char * type);
 unsigned short getType(char * type);
+char * createQuery(char * name, char * type, int * len);
 
 #endif

@@ -17,8 +17,8 @@ typedef struct {
 
 Connection * createConnection();
 void addServer(Connection * con, char * server);
-void sendQuery(Connection * con, char * query);
-char * getResponse(Connection * con);
+void sendQuery(Connection * con, char * query, int size);
+char * getResponse(Connection * con, int * len);
 void printConnection(Connection * con);
 
 #endif

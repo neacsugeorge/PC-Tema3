@@ -31,7 +31,7 @@ void addServer(Connection * con, char * server) {
     con -> servers[con -> length++] = strdup(server);
 }
 
-void sendQuery(Connection * con, char * query) {
+void sendQuery(Connection * con, char * query, int size) {
     if (con -> server_id == -1) {
         con -> server_id = 0;
 
@@ -56,10 +56,10 @@ void sendQuery(Connection * con, char * query) {
         }
     }
 
-    send(con -> fd, query, strlen(query), 0);
+    send(con -> fd, query, size, 0);
 }
 
-char * getResponse(Connection * con) {
+char * getResponse(Connection * con, int * len) {
     if (con -> server_id == -1) {
         return NULL;
     }
@@ -74,6 +74,7 @@ char * getResponse(Connection * con) {
         exit(-1);
     }
 
+    *len = bytes_received;
     return response;
 }
 
