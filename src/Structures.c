@@ -1,5 +1,6 @@
 #include "Structures.h"
 #include "Connection.h"
+#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <arpa/inet.h>
@@ -90,4 +91,32 @@ char * createQuery(char * name, char * type, int * len) {
 
     *len = index;
     return query;
+}
+
+void decodeAnswer(char * answer, int len) {
+    answer += 2;
+    len -= 2;
+
+    dns_header_t header;
+    dns_question_t question;
+    memcpy(&header, answer, sizeof(dns_header_t));
+
+    int index = sizeof(dns_header_t);
+
+    int queryLen = strlen(answer + index);
+
+    char * qname = (char *)calloc(queryLen + 1, 1);
+    strcpy(qname, answer + index);
+    question.qname = qname;
+
+    index += queryLen + 1;
+    memcpy(&question.qtype, answer + index, 2);
+
+    index += 2;
+    memcpy(&question.qclass, answer + index, 2);
+
+    index += 2;
+
+    // TODO - decode DNSAnswers
+
 }

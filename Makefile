@@ -1,6 +1,8 @@
 GCC=gcc
 FLAGS=-Wall
 
+run: dnsclient
+	./dnsclient
 
 build: dnsclient
 
